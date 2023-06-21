@@ -1,0 +1,25 @@
+.tk-comments-container {
+    font-size: 15px;
+}
+
+.pagination__title {
+    margin-bottom: 30px;
+}
+
+.pagination__title-h {
+
+}
+
+.pagination__title hr {
+
+}
+
+ul.post-tags-meta a {
+    color: var(--secondary);
+}
+
+/*评论头部间距*/
+.post-footer {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

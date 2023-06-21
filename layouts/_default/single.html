@@ -1,0 +1,145 @@
+{{- define "main" }}
+<style>
+    i[id*="post_meta_style"] {
+        display: flex;
+        align-items: center;
+        margin: 0 0 10px 0;
+    }
+</style>
+
+<article class="post-single">
+    <div id="single-content">
+        <header class="post-header">
+            {{ partial "breadcrumbs.html" . }}
+            <h1 class="post-title">
+                {{ .Title }}
+                {{- if .Draft }}<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
+            </h1>
+            {{- if .Description }}
+            <div class="post-description">
+                {{ .Description }}
+            </div>
+            {{- end }}
+            {{- if not (.Param "hideMeta") }}
+            <div class="post-meta">
+                {{- partial "post_meta.html" . -}}
+                <span style="opacity: 0.8;">
+                    <span id="post_meta_style_7">
+                        &nbsp;&nbsp;
+                        <span class="fa fa-eye" ></span>
+                        <span>
+                            <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+                            &nbsp;&nbsp;
+                        </span>
+                    </span>
+                    <span id="post_meta_style_8">
+                        <span class="fa fa-commenting-o"></span>
+                        <span>
+                            <script src="https://cdn.staticfile.org/twikoo/{{ .Site.Params.twikoo.version }}/twikoo.all.min.js"></script>
+                            <script>
+                                let url = document.documentURI
+                                {{ $baseURL := .Site.BaseURL }}
+                                let dnsUrl = {{ $baseURL }}
+                                let urlSplit = url.split(dnsUrl)
+                                let finalUrl = urlSplit[1]
+                                if (finalUrl[0] !== '/') {
+                                    finalUrl = '/'+finalUrl
+                                }
+                                twikoo.getCommentsCount({
+                                    envId: {{ .Site.Params.twikoo.id }}, // 环境 ID
+                                region: {{ .Site.Params.twikoo.region }}, // 环境地域，默认为 ap-shanghai，如果您的环境地域不是上海，需传此参数
+                                urls: [ // 不包含协议、域名、参数的文章路径列表，必传参数
+                                    // '/2020/10/post-1.html', //填写示例
+                                    finalUrl,
+                                ],
+                                    includeReply: false // 评论数是否包括回复，默认：false
+                                }).then(function (res) {
+                                    let count = res[0].count
+                                    const obj = document.getElementById("comment_count");
+                                    obj.innerText = count
+                                    // 返回示例: [
+                                    //   { url: '/2020/10/post-1.html', count: 10 },
+                                    // ]
+                                }).catch(function (err) {
+                                    // 发生错误
+                                    console.error(err);
+                                });
+                            </script>
+                            <span id="comment_count"></span>
+                        </span>
+                    </span>
+                </span>
+                {{- partial "translation_list.html" . -}}
+                {{- partial "edit_post.html" . -}}
+                {{- partial "post_canonical.html" . -}}
+            </div>
+            {{- end }}
+        </header>
+        {{- $isHidden := .Params.cover.hidden | default .Site.Params.cover.hiddenInSingle | default
+        .Site.Params.cover.hidden }}
+        {{- partial "cover1.html" (dict "cxt" . "IsHome" false "isHidden" $isHidden) }}
+        {{- if (.Param "ShowToc") }}
+        {{- partial "toc.html" . }}
+        {{- end }}
+
+        {{- if .Content }}
+        <div class="post-content">
+            {{- if not (.Param "disableAnchoredHeadings") }}
+            {{- partial "anchored_headings.html" .Content -}}
+            {{- else }}{{ .Content }}{{ end }}
+        </div>
+        {{- end }}
+
+        {{- if .Param "reward" }}
+        <div class="post-reward">
+            <div style="padding: 0 0 0 0; margin: 0 0 0 0; width: 100%; font-size:16px; text-align: center;">
+                <div id="QR" style="opacity: 0;">
+                    <div id="wechat" style="display: inline-block">
+                        <a class="fancybox" rel="group">
+                            <img id="wechat_qr" src="{{ .Site.Params.WechatPay | absURL }}" alt="wechat_pay"></a>
+                        <p>微信</p>
+                    </div>
+                    <div id="alipay" style="display: inline-block">
+                        <a class="fancybox" rel="group">
+                            <img id="alipay_qr" src="{{ .Site.Params.Alipay | absURL }}" alt="alipay"></a>
+                        <p>支付宝</p>
+                    </div>
+                </div>
+                <button id="rewardButton"
+                        onclick="
+                    var qr = document.getElementById('QR');
+                    if (qr.style.opacity === '0') {
+                        qr.style.opacity='1';
+                    } else {
+                        qr.style.opacity='0'
+                    }"
+                >
+                    <span>🧧 鼓励</span>
+                </button>
+            </div>
+        </div>
+        {{- end }}
+
+        <footer class="post-footer">
+            <!--{{- if .Params.tags }}
+            <ul class="post-tags">
+                {{- range ($.GetTerms "tags") }}
+                <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+                {{- end }}
+            </ul>
+            {{- end }}-->
+            {{- if (.Param "ShowPostNavLinks") }}
+            {{- partial "post_nav_links.html" . }}
+            {{- end }}
+            {{- if (and .Site.Params.ShowShareButtons (ne .Params.disableShare true)) }}
+            {{- partial "share_icons.html" . -}}
+            {{- end }}
+        </footer>
+    </div>
+
+    {{- if (.Param "comments") }}
+    {{- partial "comments.html" . }}
+    {{- end }}
+</article>
+
+{{- end }}{{/* end main */}}

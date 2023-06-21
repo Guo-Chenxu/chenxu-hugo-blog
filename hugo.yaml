@@ -1,0 +1,220 @@
+baseURL: https://www.chenxutalk.top
+languageCode: zh-cn # en-us
+title: Chenxu's Blog
+theme: hugo-PaperMod # 主题名字，和themes文件夹下的一致
+
+enableInlineShortcodes: true #允许内联短码
+enableEmoji: true # 允许使用 Emoji 表情，建议 true
+enableRobotsTXT: true # 允许爬虫抓取到搜索引擎，建议 true
+hasCJKLanguage: true # 自动检测是否包含 中文日文韩文 如果文章中使用了很多中文引号的话可以开启
+
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+googleAnalytics: UA-123-45 # 谷歌统计
+
+paginate: 15 # 每页显示的文章数
+summaryLength: 100 # 文章概览的自字数，默认70
+
+minify:
+    disableXML: true
+    # minifyOutput: true
+
+permalinks: #浏览器链接显示方式
+    post: "/:title/"
+    # post: "/:year/:month/:day/:title/"
+
+defaultContentLanguage: en # 最顶部首先展示的语言页面
+defaultContentLanguageInSubdir: true
+
+languages:
+    en:
+        languageName: "English"
+        # contentDir: content/english
+        weight: 1
+
+profileMode:
+    enabled: true
+    title: ｸﾞｯ!(๑•̀ㅂ•́)و✧
+    subtitle: "<br/>👏🏼欢迎光临我的博客<br/>"
+    imageUrl: "img/photo.jpg" #图片放在static/img/photo.jpg
+    imageTitle:
+    imageWidth: 150
+    imageHeight: 150
+    buttons:
+        - name: 学习笔记
+          url: posts/study
+        - name: 踩坑日记
+          url: posts/bugs
+        - name: 谈天说地
+          url: posts/life
+
+menu:
+    main:
+        - identifier: search
+          name: 🔍搜索
+          url: search
+          weight: 1
+        - identifier: home
+          name: 🏠主页
+          url: /
+          weight: 2
+        - identifier: posts
+          name: 📚 文章
+          url: posts
+          weight: 3
+        - identifier: tags
+          name: 🔖标签
+          url: tags
+          weight: 15
+        - identifier: archives
+          name: ⏱时间轴
+          url: archives/
+          weight: 20
+        - identifier: about
+          name: 🙋🏻‍♂️关于
+          url: about
+          weight: 30
+        - identifier: links
+          name: 🤝友链
+          url: links
+          weight: 40
+
+outputs:
+    home:
+        - HTML
+        - RSS
+        - JSON
+
+params:
+    env: production # to enable google analytics, opengraph, twitter-cards and schema.
+    description: "谈谈技术, 聊聊bug"
+    author: Chenxu
+    # author: ["Me", "You"] # multiple authors
+    defaultTheme: auto # defaultTheme: light or  dark
+    disableThemeToggle: false
+    DateFormat: "2006-01-02" #不能改, 显示错误
+    ShowShareButtons: true
+    ShowReadingTime: true
+    # disableSpecialistPost: true
+    displayFullLangName: true
+    ShowPostNavLinks: true
+    ShowBreadCrumbs: true
+    ShowCodeCopyButtons: true
+    hideFooter: false # 隐藏页脚
+    ShowWordCounts: true
+    VisitCount: true
+    ShowLastMod: true #显示文章更新时间
+
+    ShowToc: true # 显示目录
+    TocOpen: true # 自动展开目录
+
+    # comments: true
+
+    socialIcons:
+        - name: github
+          url: "https://github.com/Guo-Chenxu"
+        - name: email
+          url: "mailto:2269409349@qq.com"
+        - name: RSS
+          url: "index.xml"
+
+    # editPost:
+    #     URL: "https://github.com/adityatelange/hugo-PaperMod/tree/exampleSite/content"
+    #     Text: "Suggest Changes" # edit text
+    #     appendFilePath: true # to append file path to Edit link
+
+    label: # 左上角图标
+        text: "Chenxu's Blog"
+        icon: "img/photo.jpg"
+        iconHeight: 35
+
+    analytics: #谷歌分析
+        google:
+            SiteVerificationTag: ""
+
+    assets:
+        favicon: "img/photo.jpg"
+        favicon16x16: "img/photo.jpg"
+        favicon32x32: "img/photo.jpg"
+        apple_touch_icon: "photo.jpg"
+        safari_pinned_tab: "photo.jpg"
+
+    cover:
+        hidden: true # hide everywhere but not in structured data
+        hiddenInList: true # hide on list pages and home
+        hiddenInSingle: true # hide on single page
+
+    fuseOpts: # 配置搜索
+        isCaseSensitive: false
+        shouldSort: true
+        location: 0
+        distance: 1000
+        threshold: 0.4
+        minMatchCharLength: 0
+        keys: ["title", "permalink", "summary"]
+
+    StartYear: 2023 # 底部开始年份
+    FilingNo: 填写自己的备案号 # 底部备案号
+    PublicSecurityIconLink: img/beian.png # 填自己的公安图标链接,可用绝对路径，相对路径如 img/beian.png
+    PublicNetworkSecurity: 填自己的公网安备 # 底部公网安备号
+
+    Reward: true #打赏是否开启
+    # 打赏微信图片地址，
+    # 可用绝对和相对地址，相对地址的图片需放在static/img下，
+    # 填写格式为img/wechat_pay.png
+    WechatPay: "img/wechat_pay.png"
+    Alipay: "img/alipay.png" #打赏支付宝图片地址
+
+taxonomies:
+    category: categories
+    tag: tags
+    series: series
+
+markup:
+    goldmark:
+        renderer:
+            unsafe: true # HUGO 默认转义 Markdown 文件中的 HTML 代码，如需开启的话
+    highlight:
+        # anchorLineNos: true
+        codeFences: true
+        guessSyntax: true
+        # lineNos: true
+        noClasses: false
+        # style: monokai
+        tabWidth: 4
+        style: darcula
+        lineNumbersInTable: true
+
+        # codeFences：代码围栏功能，这个功能一般都要设为 true 的，不然很难看，就是干巴巴的-代码文字，没有颜色。
+        # guessSyntax：猜测语法，这个功能建议设置为 true, 如果你没有设置要显示的语言则会自动匹配。
+        # hl_Lines：高亮的行号，一般这个不设置，因为每个代码块我们可能希望让高亮的地方不一样。
+        # lineNoStart：行号从编号几开始，一般从 1 开始。
+        # lineNos：是否显示行号, true的话会有bug
+        # lineNumbersInTable：使用表来格式化行号和代码,而不是 标签。这个属性一般设置为 true.
+        # noClasses：使用 class 标签，而不是内嵌的内联样式
+
+privacy:
+    vimeo:
+        disabled: false
+        simple: true
+
+    twitter:
+        disabled: false
+        enableDNT: true
+        simple: true
+
+    instagram:
+        disabled: false
+        simple: true
+
+    youtube:
+        disabled: false
+        privacyEnhanced: true
+
+services:
+    instagram:
+        disableInlineCSS: true
+    twitter:
+        disableInlineCSS: true

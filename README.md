@@ -1,5 +1,7 @@
 # hugo 博客搭建(本地)
 
+本项目参考自[hugo框架](https://gohugo.io/), [paperMode主题](https://github.com/adityatelange/hugo-PaperMod), 以及[paperMod主题的改版](https://github.com/xyming108/sulv-hugo-papermod), 并做了一些修改, 目前是可以开箱即用
+
 [我的博客地址](www.chenxutalk.top)
 
 ## 安装 hugo
